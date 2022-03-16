@@ -1,6 +1,6 @@
 # Qt5Driver
 
-V. 0.5 - Testing
+V. 0.5.1 - Testing
 
 A program that makes things when a device has been plugged/unplugged or a window starts/closes.
 
