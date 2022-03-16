@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# V. 0.5
+# V. 0.5.1
 
 from PyQt5.QtCore import (Qt,QMargins)
 from PyQt5.QtWidgets import (QDesktopWidget,QLineEdit,QListWidget,QListWidgetItem,QFileDialog,QSizePolicy,qApp,QBoxLayout,QLabel,QPushButton,QApplication,QDialog,QGridLayout,QMessageBox,QTabWidget,QWidget,QComboBox,QCheckBox)
@@ -405,9 +405,9 @@ class MainWin(QWidget):
     def on_get_file_win(self):
         if self.window_list.currentItem() == None:
             return
-        fileName, fileType = QFileDialog.getOpenFileNames(self,"Select the file", os.path.expanduser('~'),"All Files (*)")
+        fileName, fileType = QFileDialog.getOpenFileName(self,"Select the file", os.path.expanduser('~'),"All Files (*)")
         if fileName:
-            self.label_script_win.setText(fileName[0])
+            self.label_script_win.setText(fileName)
 
 ############ WINDOWS END ############
 
@@ -520,9 +520,9 @@ class MainWin(QWidget):
     def on_get_file(self):
         if self.usb_dev_list.currentItem() == None:
             return
-        fileName, fileType = QFileDialog.getOpenFileNames(self,"Select the file", os.path.expanduser('~'),"All Files (*)")
+        fileName, fileType = QFileDialog.getOpenFileName(self,"Select the file", os.path.expanduser('~'),"All Files (*)")
         if fileName:
-            self.label_script.setText(fileName[0])
+            self.label_script.setText(fileName)
         
 ############ USB DEVICES END ############
 
