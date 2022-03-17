@@ -283,24 +283,6 @@ notifier.start()
 
 ################################
 
-#######################
-
-class EventThread(threading.Thread):
-    display = None
-    _stop = None
-
-    def __init__(self, display):
-        super(EventThread, self).__init__()
-        self.display = display
-        self.daemon = True
-
-    def run(self):
-        while True:
-            event = self.display.next_event()
-            if (event.type == X.PropertyNotify):
-                if event.atom == self.display.intern_atom('_NET_CLIENT_LIST'):
-
-####################
 if USE_USB_DEVICES:
     context = pyudev.Context()
     monitor = pyudev.Monitor.from_netlink(context)
