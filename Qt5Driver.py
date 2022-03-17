@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# V. 0.5.1
+# V. 0.5.2
 
 from PyQt5.QtCore import (Qt,QMargins)
 from PyQt5.QtWidgets import (QDesktopWidget,QLineEdit,QListWidget,QListWidgetItem,QFileDialog,QSizePolicy,qApp,QBoxLayout,QLabel,QPushButton,QApplication,QDialog,QGridLayout,QMessageBox,QTabWidget,QWidget,QComboBox,QCheckBox)
@@ -265,9 +265,9 @@ class MainWin(QWidget):
         self.ckb3.stateChanged.connect(self.on_ckb3)
         self.grid3.addWidget(self.ckb3, 5, 0, 1, 5, Qt.AlignLeft)
         # script
-        button_script_win = QPushButton("Script")
-        button_script_win.clicked.connect(self.on_get_file_win)
-        self.grid3.addWidget(button_script_win, 6, 0, 1, 1)
+        self.button_script_win = QPushButton("Script")
+        self.button_script_win.clicked.connect(self.on_get_file_win)
+        self.grid3.addWidget(self.button_script_win, 6, 0, 1, 1)#, Qt.AlignLeft)
         self.label_script_win = QLineEdit()
         self.label_script_win.setClearButtonEnabled(True)
         self.label_script_win.textChanged.connect(self.on_label_scrip_win)
@@ -326,6 +326,14 @@ class MainWin(QWidget):
         curr_item = self.window_list.currentItem()
         if curr_item:
             curr_item.data2 = idx
+        if idx == 0:
+            self.label_script_win.setEnabled(True)
+            self.button_script_win.setEnabled(True)
+        else:
+            self.label_script_win.clear()
+            self.label_script_win.setEnabled(False)
+            self.button_script_win.setEnabled(False)
+            
     
     # notification
     def on_ckb3(self, cstate):
@@ -478,11 +486,12 @@ class MainWin(QWidget):
             item.data4 = 0
             # notification desktop
             item.data5 = 0
+            # self.label_name.setText(data_get[0])
             self.label_vendor.setText(data_get[1])
             self.label_product.setText(data_get[2])
             #
             self.usb_dev_list.setCurrentItem(item)
-            
+    
     def on_remove(self):
         if self.mtab.currentIndex() == 0:
             self.on_remove_usb()
@@ -672,6 +681,7 @@ class chooseDialog(QDialog):
                     device_name = device.get('ID_MODEL_FROM_DATABASE')
                 else:
                     device_name = device.get('ID_MODEL_ID')
+                # 
                 self.usb_list.addItem(device_name+" - "+device.get('ID_VENDOR_ID')+":"+device.get('ID_MODEL_ID'))
                 self.Value = [device_name,device.get('ID_VENDOR_ID'),device.get('ID_MODEL_ID'), device.get('DEVNAME')]
     
